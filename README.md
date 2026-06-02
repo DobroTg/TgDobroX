@@ -22,9 +22,10 @@
             color: #ffffff;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
             overflow: hidden;
         }
@@ -68,20 +69,47 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Огромная красивая надпись сверху сайта */
+        .header-title {
+            z-index: 2;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 35px;
+            padding: 0 10px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .header-title h1 {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            line-height: 1.3;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 20%, #c77dff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(199, 125, 255, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Главная Glassmorphism-карточка визитки */
         .card {
-            background: rgba(14, 8, 24, 0.45);
+            background: rgba(14, 8, 24, 0.55);
             backdrop-filter: blur(35px);
             -webkit-backdrop-filter: blur(35px);
             border: 1px solid rgba(157, 78, 221, 0.25);
             border-radius: 28px;
-            padding: 50px 35px;
+            padding: 45px 35px;
             width: 100%;
-            max-width: 390px;
+            max-width: 410px;
             text-align: center;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 
-                        0 0 50px rgba(123, 44, 191, 0.1);
-            z-index: 1;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 
+                        0 0 50px rgba(123, 44, 191, 0.15);
+            z-index: 2;
             position: relative;
             transform: translateY(20px);
             opacity: 0;
@@ -94,12 +122,14 @@
 
         /* Сияющая плашка статуса */
         .status-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: rgba(157, 78, 221, 0.08);
             border: 1px solid rgba(157, 78, 221, 0.5);
             padding: 9px 24px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 2.5px;
             color: #d8bbff;
@@ -109,16 +139,27 @@
             animation: pulseGlow 2.5s infinite alternate ease-in-out;
         }
 
+        /* Пульсирующая точка статуса */
+        .status-badge::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #00f5d4;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00f5d4;
+        }
+
         @keyframes pulseGlow {
             0% { transform: scale(1); box-shadow: 0 0 15px rgba(157, 78, 221, 0.2); border-color: rgba(157, 78, 221, 0.4); }
             100% { transform: scale(1.03); box-shadow: 0 0 30px rgba(157, 78, 221, 0.5); border-color: #c77dff; }
         }
 
-        /* Крупный неоновый готический никнейм */
+        /* Крупный неоновый готический никнейм без авы */
         .nickname {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 35px;
             letter-spacing: 1.5px;
             background: linear-gradient(135deg, #ffffff 30%, #e0aaff 100%);
             -webkit-background-clip: text;
@@ -126,57 +167,26 @@
             text-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* Список элементов меню */
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        /* Кнопки действий */
-        .btn-link {
+        /* Кнопка скопировать юзернейм */
+        .btn-copy {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 20px 26px;
+            background: linear-gradient(135deg, rgba(121, 40, 202, 0.2), rgba(255, 0, 127, 0.04));
+            border: 1px solid rgba(121, 40, 202, 0.4);
+            padding: 22px 26px;
             border-radius: 18px;
             color: #ffffff;
-            text-decoration: none;
             font-size: 15px;
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
         }
 
-        .btn-link:hover {
-            background: rgba(157, 78, 221, 0.12);
-            border-color: #b5179e;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(181, 23, 158, 0.25);
-        }
-
-        .btn-link .arrow {
-            font-size: 20px;
-            transition: transform 0.4s ease;
-            color: #c77dff;
-        }
-
-        .btn-link:hover .arrow {
-            transform: translateX(6px);
-            color: #ff007f;
-        }
-
-        /* Кнопка скопировать юзернейм */
-        .btn-copy {
-            background: linear-gradient(135deg, rgba(121, 40, 202, 0.2), rgba(255, 0, 127, 0.04));
-            border: 1px solid rgba(121, 40, 202, 0.4);
-        }
-
         .btn-copy:hover {
             background: linear-gradient(135deg, rgba(121, 40, 202, 0.35), rgba(255, 0, 127, 0.08));
             border-color: #ff007f;
+            transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(255, 0, 127, 0.25);
         }
 
@@ -223,51 +233,50 @@
 </head>
 <body>
 
-    <!-- Живой ликвидный фон на мой вкус -->
+    <!-- Живой ликвидный фон -->
     <div class="neon-bg"></div>
 
-    <!-- Основной контейнер сайта -->
+    <!-- Большая надпись красивым шрифтом сверху сайта -->
+    <div class="header-title">
+        <h1>Скопируй юз и вставь в поиск телеграмма</h1>
+    </div>
+
+    <!-- Главная Glassmorphism-карточка визитки -->
     <div class="card">
+        <!-- Современное окно с надписью Online -->
         <div class="status-badge">Online 10:00 - 23:00 мск</div>
 
-        <!-- Крупный готический ник -->
+        <!-- Крупный готический ник без аватарки -->
         <div class="nickname">𝕯𝖔𝖇𝖗𝖔</div>
 
-        <div class="links-container">
-            <!-- Кнопка ведет напрямую на веб-версию сообщения в канале -->
-            <a href="https://telegram.org" target="_blank" class="btn-link">
-                <span>Связаться со мной напрямую</span>
-                <span class="arrow">➔</span>
-            </a>
-
-            <!-- Кнопка для быстрого копирования юза -->
-            <div class="btn-link btn-copy" onclick="copyUsername()">
-                <span>Скопировать юз @DobroX0</span>
-                <span class="icon-copy" id="copy-text">COPY</span>
-            </div>
+        <!-- Один единственный пункт: Скопировать юзернейм -->
+        <div class="btn-link btn-copy" onclick="copyUsername()">
+            <span>Скопировать юзернейм @DobroX0</span>
+            <span class="icon-copy" id="copy-text">COPY</span>
         </div>
     </div>
 
-    <!-- Всплывающий тост -->
+    <!-- Всплывающий Тост (Уведомление) -->
     <div class="toast" id="toast">Юзернейм скопирован!</div>
 
+    <!-- Скрипт для копирования и анимации кнопки -->
     <script>
         function copyUsername() {
             const username = "@DobroX0";
             
             navigator.clipboard.writeText(username).then(() => {
-                const toast = document.getElementById('toast');
-                const copyBtnText = document.getElementById('copy-text');
+                const toast = document.getElementById("toast");
+                const copyText = document.getElementById("copy-text");
                 
-                copyBtnText.innerText = '✓';
-                toast.classList.add('show');
+                copyText.innerText = "COPIED!";
+                toast.classList.add("show");
                 
                 setTimeout(() => {
-                    toast.classList.remove('show');
-                    copyBtnText.innerText = 'COPY';
-                }, 2200);
+                    toast.classList.remove("show");
+                    copyText.innerText = "COPY";
+                }, 2500);
             }).catch(err => {
-                console.error('Ошибка копирования: ', err);
+                console.error("Не удалось скопировать: ", err);
             });
         }
     </script>
