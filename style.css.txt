@@ -7,7 +7,7 @@
     <!-- Подключаем стильный шрифт Montserrat -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
         * {
@@ -223,7 +223,7 @@
 </head>
 <body>
 
-    <!-- Живой ликвидный фон на мой вкус -->
+    <!-- Живой ликвидный фон -->
     <div class="neon-bg"></div>
 
     <!-- Основной контейнер сайта -->
@@ -234,8 +234,8 @@
         <div class="nickname">𝕯𝖔𝖇𝖗𝖔</div>
 
         <div class="links-container">
-            <!-- Кнопка ведет напрямую на веб-версию сообщения в канале -->
-            <a href="https://telegram.org" target="_blank" class="btn-link">
+            <!-- Кнопка ведет напрямую в приложение Telegram -->
+            <a href="tg://resolve?domain=DobroX0" class="btn-link">
                 <span>Связаться со мной напрямую</span>
                 <span class="arrow">➔</span>
             </a>
@@ -248,26 +248,32 @@
         </div>
     </div>
 
-    <!-- Всплывающий тост -->
+    <!-- Всплывающее уведомление (Toast) -->
     <div class="toast" id="toast">Юзернейм скопирован!</div>
 
+    <!-- Логика работы кнопки и уведомления -->
     <script>
         function copyUsername() {
             const username = "@DobroX0";
             
+            // Копирование в буфер обмена
             navigator.clipboard.writeText(username).then(() => {
-                const toast = document.getElementById('toast');
-                const copyBtnText = document.getElementById('copy-text');
+                const toast = document.getElementById("toast");
+                const copyText = document.getElementById("copy-text");
                 
-                copyBtnText.innerText = '✓';
-                toast.classList.add('show');
+                // Визуальный отклик на кнопке
+                copyText.innerText = "COPIED!";
                 
+                // Показ уведомления
+                toast.classList.add("show");
+                
+                // Скрываем обратно через 2.5 секунды
                 setTimeout(() => {
-                    toast.classList.remove('show');
-                    copyBtnText.innerText = 'COPY';
-                }, 2200);
+                    toast.classList.remove("show");
+                    copyText.innerText = "COPY";
+                }, 2500);
             }).catch(err => {
-                console.error('Ошибка копирования: ', err);
+                console.error("Не удалось скопировать: ", err);
             });
         }
     </script>
